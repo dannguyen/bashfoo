@@ -1,0 +1,105 @@
+"""
+bashfoo.yaml
+
+https://github.com/dannguyen/bashfoo
+
+Dan Nguyen's personally curated list of bash/command-line commands and snippets
+  that are useful but yet he keeps forgetting
+
+"""
+# Template:
+#
+#
+# "slug_for_command":
+#   date: YYYY-MM-DD
+#   article:
+#       title: related article title
+#       url: https://example.com
+#
+#     code: |
+#       find . -name "foo*"
+#     output: |
+#
+#        sample output
+#        from utils stdout/stedrr
+#
+############################################################################################################
+
+"Filename stem, i.e. without the path or extension":
+  date: 2019-11-02
+  article:
+    title: Extract filename and extension in Bash
+    url: https://stackoverflow.com/questions/965053/extract-filename-and-extension-in-bash
+  code: |
+    fullname=/tmp/hello/world.txt
+    newname="a_whole_new_$(basename ${fullname%.*})"
+    echo $newname
+  output: |
+    a_whole_new_world
+
+"`pkill` using a file pattern":
+  date: 2019-07-25
+  article:
+    url: https://stackoverflow.com/questions/8987037/how-to-kill-all-processes-with-a-given-partial-name
+    title: How to kill all processes with a given partial name?
+  code: |
+    pkill -fil ipython
+  output: |
+    kill -15 90396
+    kill -15 90523
+
+"`pgrep` and get all process info":
+  date: 2019-07-25
+  article:
+    url: https://serverfault.com/questions/77162/how-to-get-pgrep-to-display-full-process-info
+    title: How to get pgrep to display full process info
+  code: |
+    # MacOS
+    pgrep -fil 'rails'
+
+    # Linux
+    pgrep -af 'rails'
+
+  output: |
+
+    47502 rails master RBENV_VERSION=2.5.1 TERMINAL_FONT=Monaco
+    47517 rails worker[0] RBENV_VERSION=2.5.1 TERMINAL_FONT=Monaco
+
+
+"`tar` extraction, verbose":
+  date: 2019-07-18
+  article:
+      title: The tar command explained
+      url: https://www.howtoforge.com/tutorial/linux-tar-command/
+  code: |
+    tar xzfv ARCHIVE.TAR.GZ
+
+
+"`find` file by name":
+  article:
+    title: 'How can I recursively find all files in current and subfolders based on wildcard matching?'
+    url: https://stackoverflow.com/questions/5905054/how-can-i-recursively-find-all-files-in-current-and-subfolders-based-on-wildcard
+  code: |
+    find . -name "foo*"
+
+
+"`find` directory name recursively":
+  article:
+    title: How can I recursively search for directory names with a particular string where the string is only part of the directory name
+    url: https://askubuntu.com/questions/153144/how-can-i-recursively-search-for-directory-names-with-a-particular-string-where
+
+  code: |
+    find START_DIR -type d -name "PATTERN"
+
+
+
+"`find` and execute command on each file":
+  article:
+    title: How to run find -exec?
+    url: https://unix.stackexchange.com/questions/12902/how-to-run-find-exec
+
+  code: |
+    find ./PATTERN -exec FOO BAR {} \;
+
+    find PlainText/*.md -exec wc -l {} \;
+
