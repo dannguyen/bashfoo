@@ -25,6 +25,17 @@ Dan Nguyen's personally curated list of bash/command-line commands and snippets
 #
 ############################################################################################################
 
+"Echo to stderr":
+  date: 2019-11-23
+  article:
+    title: echo that outputs to stderr
+    url: https://stackoverflow.com/questions/2990414/echo-that-outputs-to-stderr
+  code: |
+    >&2 echo "hello error"
+  output: |
+    hello error
+
+
 "Filename stem, i.e. without the path or extension":
   date: 2019-11-02
   article:
