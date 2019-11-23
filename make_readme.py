@@ -2,6 +2,7 @@
 
 """The worst markdown generator ever"""
 from pathlib import Path
+import re
 import yaml
 
 SRC_PATH = Path('.', 'bashfoo.yaml')
@@ -15,32 +16,52 @@ HEADER = """
 Dan Nguyen's personally curated list of bash/command-line commands and snippets
   that are useful but yet he keeps forgetting
 
------
-
 """
 
+def anchorify(txt):
+    return f'manifest-{slugify(txt)}'
+
+def slugify(txt):
+    return re.sub(r'\W+', '-', txt.strip()).lower()
+
+def make_toc(manifest):
+    toc = "\n## TOC\n\n"
+    for title, m in manifest.items():
+        toc += f"- [{title}](#{anchorify(title)})\n"
+    toc += "\n------\n"
+    return toc
+
+def make_body(manifest):
+    body = "\n"
+    for title, m in manifest.items():
+        # anchor
+        body += "\n\n"
+        body += (f"""<a name="{anchorify(title)}" id="{anchorify(title)}"></a>\n""")
+
+        # title
+        body += (f"\n### {title}\n")
+        # code
+        body += (f"""\n```sh\n# Example\n\n{m['code']}```\n""")
+
+        # output
+        if m.get('output'):
+            body += ("\nOutput:\n")
+            body += (f"""\n```\n{m['output']}```\n""")
+
+        if m.get('article'):
+            a = m['article']
+            body += ("\n**Reference**: ")
+            body += (f"[{a['title']}]({a['url']})\n")
+    return body
 
 def main():
     mani = yaml.load(SRC_PATH.open(), Loader=yaml.BaseLoader)
 
     with open(DEST_PATH, 'w') as outs:
         outs.write(HEADER)
+        outs.write(make_toc(mani))
+        outs.write(make_body(mani))
 
-        for title, m in mani.items():
-            outs.write(f"\n### {title}\n")
-            # code
-            outs.write(f"""\n```sh\n# Example\n\n{m['code']}```\n""")
-
-
-            # output
-            if m.get('output'):
-                outs.write("\nOutput:\n")
-                outs.write(f"""\n```\n{m['output']}```\n""")
-
-            if m.get('article'):
-                a = m['article']
-                outs.write("\n**Reference**: ")
-                outs.write(f"[{a['title']}]({a['url']})\n")
 
 
 if __name__ == '__main__':
