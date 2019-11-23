@@ -1,23 +1,23 @@
-"""
-bashfoo.yaml
+# bashfoo.yaml
 
-https://github.com/dannguyen/bashfoo
+# https://github.com/dannguyen/bashfoo
 
-Dan Nguyen's personally curated list of bash/command-line commands and snippets
-  that are useful but yet he keeps forgetting
+# Dan Nguyen's personally curated list of bash/command-line commands and snippets
+#   that are useful but yet he keeps forgetting
 
-"""
 # Template:
 #
 #
 # "slug_for_command":
 #   date: YYYY-MM-DD
+#
 #   article:
 #       title: related article title
 #       url: https://example.com
 #
 #     code: |
 #       find . -name "foo*"
+#
 #     output: |
 #
 #        sample output
@@ -25,7 +25,7 @@ Dan Nguyen's personally curated list of bash/command-line commands and snippets
 #
 ############################################################################################################
 
-"Echo to stderr":
+"echo to stderr":
   date: 2019-11-23
   article:
     title: echo that outputs to stderr
