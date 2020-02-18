@@ -25,6 +25,30 @@
 #
 ############################################################################################################
 
+
+"calculate total kilobytes of hard disk space for files with given extension(s)":
+  date: 2020-02-18
+  article:
+    title: "Find the total size of certain files within a directory branch"
+    url: https://unix.stackexchange.com/questions/41550/find-the-total-size-of-certain-files-within-a-directory-branch/148472
+  code: |
+    echo $(find . -type f \
+            \( -iname "*.csv" -o -iname '*.xls*' \) \
+            -printf "%k+" \
+            2>/dev/null; \
+            echo 0;) | bc
+
+  output: |
+    15732
+
+  notes: |
+
+    - Requires the use of gnu-find (gfind on my MacOS)
+    - use `-printf "%s+"` to print size by bytes
+    - `2>/dev/null` hides error messages
+    - `-iname` is case-insensitive
+
+
 "echo to stderr":
   date: 2019-11-23
   article:

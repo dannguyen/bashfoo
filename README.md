@@ -9,6 +9,7 @@ Dan Nguyen's personally curated list of bash/command-line commands and snippets
 
 ## TOC
 
+- [calculate total kilobytes of hard disk space for files with given extension(s)](#manifest-calculate-total-kilobytes-of-hard-disk-space-for-files-with-given-extension-s-)
 - [echo to stderr](#manifest-echo-to-stderr)
 - [Filename stem, i.e. without the path or extension](#manifest-filename-stem-i-e-without-the-path-or-extension)
 - [`pkill` using a file pattern](#manifest--pkill-using-a-file-pattern)
@@ -20,6 +21,37 @@ Dan Nguyen's personally curated list of bash/command-line commands and snippets
 
 ------
 
+
+
+<a name="manifest-calculate-total-kilobytes-of-hard-disk-space-for-files-with-given-extension-s-" id="manifest-calculate-total-kilobytes-of-hard-disk-space-for-files-with-given-extension-s-"></a>
+
+### calculate total kilobytes of hard disk space for files with given extension(s)
+
+```sh
+# Example
+
+echo $(find . -type f \
+        \( -name "*.csv" -o -name '*.xls*' \) \
+        -printf "%k+" \
+        2>/dev/null; \
+        echo 0;) | bc
+```
+
+Output:
+
+```
+15732
+```
+
+**Reference**: [Find the total size of certain files within a directory branch](https://unix.stackexchange.com/questions/41550/find-the-total-size-of-certain-files-within-a-directory-branch/148472)
+
+**Notes**: 
+
+
+
+- Requires the use of gnu-find (gfind on my MacOS)
+- use `-printf "%s+"` to print size by bytes
+- `2>/dev/null` hides error messages
 
 
 <a name="manifest-echo-to-stderr" id="manifest-echo-to-stderr"></a>

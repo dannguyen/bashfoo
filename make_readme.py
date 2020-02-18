@@ -52,6 +52,11 @@ def make_body(manifest):
             a = m['article']
             body += ("\n**Reference**: ")
             body += (f"[{a['title']}]({a['url']})\n")
+
+        if m.get('notes'):
+            n = m['notes']
+            body += ("\n**Notes**: \n\n")
+            body += f"\n{m['notes']}"
     return body
 
 def main():
