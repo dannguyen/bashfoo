@@ -9,6 +9,7 @@ Dan Nguyen's personally curated list of bash/command-line commands and snippets
 
 ## TOC
 
+- [convert image to favicon.ico](#manifest-convert-image-to-favicon-ico)
 - [calculate total kilobytes of hard disk space for files with given extension(s)](#manifest-calculate-total-kilobytes-of-hard-disk-space-for-files-with-given-extension-s-)
 - [echo to stderr](#manifest-echo-to-stderr)
 - [Filename stem, i.e. without the path or extension](#manifest-filename-stem-i-e-without-the-path-or-extension)
@@ -23,6 +24,19 @@ Dan Nguyen's personally curated list of bash/command-line commands and snippets
 
 
 
+<a name="manifest-convert-image-to-favicon-ico" id="manifest-convert-image-to-favicon-ico"></a>
+
+### convert image to favicon.ico
+
+```sh
+# Example
+
+magick /tmp/testimage.png -background none -resize 128x128 -density 128x128 favicon.ico
+```
+
+**Reference**: [Convert PNG to ICO](https://imagemagick.org/discourse-server/viewtopic.php?t=36031)
+
+
 <a name="manifest-calculate-total-kilobytes-of-hard-disk-space-for-files-with-given-extension-s-" id="manifest-calculate-total-kilobytes-of-hard-disk-space-for-files-with-given-extension-s-"></a>
 
 ### calculate total kilobytes of hard disk space for files with given extension(s)
@@ -31,8 +45,8 @@ Dan Nguyen's personally curated list of bash/command-line commands and snippets
 # Example
 
 echo $(find . -type f \
-        \( -name "*.csv" -o -name '*.xls*' \) \
-        -printf "%k+" \
+        \( -iname "*.csv" -o -iname '*.xls*' \) \
+        -printf "(%k/1024)+" \
         2>/dev/null; \
         echo 0;) | bc
 ```
@@ -52,6 +66,7 @@ Output:
 - Requires the use of gnu-find (gfind on my MacOS)
 - use `-printf "%s+"` to print size by bytes
 - `2>/dev/null` hides error messages
+- `-iname` is case-insensitive
 
 
 <a name="manifest-echo-to-stderr" id="manifest-echo-to-stderr"></a>

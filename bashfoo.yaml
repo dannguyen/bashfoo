@@ -25,6 +25,13 @@
 #
 ############################################################################################################
 
+"convert image to favicon.ico":
+  date: 2020-03-24
+  article:
+    title: Convert PNG to ICO
+    url: https://imagemagick.org/discourse-server/viewtopic.php?t=36031
+  code: |
+    magick /tmp/testimage.png -background none -resize 128x128 -density 128x128 favicon.ico
 
 "calculate total kilobytes of hard disk space for files with given extension(s)":
   date: 2020-02-18
@@ -34,7 +41,7 @@
   code: |
     echo $(find . -type f \
             \( -iname "*.csv" -o -iname '*.xls*' \) \
-            -printf "%k+" \
+            -printf "(%k/1024)+" \
             2>/dev/null; \
             echo 0;) | bc
 
