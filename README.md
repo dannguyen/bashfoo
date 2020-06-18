@@ -9,6 +9,7 @@ Dan Nguyen's personally curated list of bash/command-line commands and snippets
 
 ## TOC
 
+- [xargs (BSD) to pipe results into another command, one at a time](#manifest-xargs-bsd-to-pipe-results-into-another-command-one-at-a-time)
 - [convert image to favicon.ico](#manifest-convert-image-to-favicon-ico)
 - [calculate total kilobytes of hard disk space for files with given extension(s)](#manifest-calculate-total-kilobytes-of-hard-disk-space-for-files-with-given-extension-s-)
 - [echo to stderr](#manifest-echo-to-stderr)
@@ -22,6 +23,23 @@ Dan Nguyen's personally curated list of bash/command-line commands and snippets
 
 ------
 
+
+
+<a name="manifest-xargs-bsd-to-pipe-results-into-another-command-one-at-a-time" id="manifest-xargs-bsd-to-pipe-results-into-another-command-one-at-a-time"></a>
+
+### xargs (BSD) to pipe results into another command, one at a time
+
+```sh
+# Example
+
+echo Alice Bob Charlie | xargs -I{} -n1 echo 'Hey, {} is a great name!'```
+
+Output:
+
+```
+Hey, Alice is a great name! Hey, Bob is a great name! Hey, Charlie is a great name!```
+
+**Reference**: [Execute a command once per line of piped input?](https://unix.stackexchange.com/questions/7558/execute-a-command-once-per-line-of-piped-input)
 
 
 <a name="manifest-convert-image-to-favicon-ico" id="manifest-convert-image-to-favicon-ico"></a>

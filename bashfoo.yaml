@@ -25,6 +25,19 @@
 #
 ############################################################################################################
 
+"xargs (BSD) to pipe results into another command, one at a time":
+  date: 2020-06-18
+  article:
+    title: "Execute a command once per line of piped input?"
+    url: https://unix.stackexchange.com/questions/7558/execute-a-command-once-per-line-of-piped-input
+  code:
+    echo Alice Bob Charlie | xargs -I{} -n1 echo 'Hey, {} is a great name!'
+  output:
+    Hey, Alice is a great name!
+    Hey, Bob is a great name!
+    Hey, Charlie is a great name!
+
+
 "convert image to favicon.ico":
   date: 2020-03-24
   article:
