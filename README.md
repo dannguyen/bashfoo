@@ -9,11 +9,11 @@ Dan Nguyen's personally curated list of bash/command-line commands and snippets
 
 ## TOC
 
-- [xargs (BSD) to pipe results into another command, one at a time](#manifest-xargs-bsd-to-pipe-results-into-another-command-one-at-a-time)
-- [convert image to favicon.ico](#manifest-convert-image-to-favicon-ico)
+- [`xargs` (BSD) to pipe results into another command, one at a time](#manifest--xargs-bsd-to-pipe-results-into-another-command-one-at-a-time)
+- [`magick` convert image to favicon.ico](#manifest--magick-convert-image-to-favicon-ico)
 - [calculate total kilobytes of hard disk space for files with given extension(s)](#manifest-calculate-total-kilobytes-of-hard-disk-space-for-files-with-given-extension-s-)
-- [echo to stderr](#manifest-echo-to-stderr)
-- [Filename stem, i.e. without the path or extension](#manifest-filename-stem-i-e-without-the-path-or-extension)
+- [`printf` to stderr](#manifest--printf-to-stderr)
+- [Stem filename, i.e. get filename sans path or extension](#manifest-stem-filename-i-e-get-filename-sans-path-or-extension)
 - [`pkill` using a file pattern](#manifest--pkill-using-a-file-pattern)
 - [`pgrep` and get all process info](#manifest--pgrep-and-get-all-process-info)
 - [`tar` extraction, verbose](#manifest--tar-extraction-verbose)
@@ -25,26 +25,30 @@ Dan Nguyen's personally curated list of bash/command-line commands and snippets
 
 
 
-<a name="manifest-xargs-bsd-to-pipe-results-into-another-command-one-at-a-time" id="manifest-xargs-bsd-to-pipe-results-into-another-command-one-at-a-time"></a>
+<a name="manifest--xargs-bsd-to-pipe-results-into-another-command-one-at-a-time" id="manifest--xargs-bsd-to-pipe-results-into-another-command-one-at-a-time"></a>
 
-### xargs (BSD) to pipe results into another command, one at a time
+### `xargs` (BSD) to pipe results into another command, one at a time
 
 ```sh
 # Example
 
-echo Alice Bob Charlie | xargs -I{} -n1 echo 'Hey, {} is a great name!'```
+echo Alice Bob Charlie | xargs -I{} -n1 echo 'Hey, {} is a great name!'
+```
 
 Output:
 
 ```
-Hey, Alice is a great name! Hey, Bob is a great name! Hey, Charlie is a great name!```
+Hey, Alice is a great name!
+Hey, Bob is a great name!
+Hey, Charlie is a great name!
+```
 
 **Reference**: [Execute a command once per line of piped input?](https://unix.stackexchange.com/questions/7558/execute-a-command-once-per-line-of-piped-input)
 
 
-<a name="manifest-convert-image-to-favicon-ico" id="manifest-convert-image-to-favicon-ico"></a>
+<a name="manifest--magick-convert-image-to-favicon-ico" id="manifest--magick-convert-image-to-favicon-ico"></a>
 
-### convert image to favicon.ico
+### `magick` convert image to favicon.ico
 
 ```sh
 # Example
@@ -87,28 +91,29 @@ Output:
 - `-iname` is case-insensitive
 
 
-<a name="manifest-echo-to-stderr" id="manifest-echo-to-stderr"></a>
+<a name="manifest--printf-to-stderr" id="manifest--printf-to-stderr"></a>
 
-### echo to stderr
+### `printf` to stderr
 
 ```sh
 # Example
 
->&2 echo "hello error"
+>&2 printf 'Error: %s\n' 'There was a problem' 'And another problem'
 ```
 
 Output:
 
 ```
-hello error
+Error: There was a problem
+Error: And another problem
 ```
 
-**Reference**: [echo that outputs to stderr](https://stackoverflow.com/questions/2990414/echo-that-outputs-to-stderr)
+**Reference**: [print output to stderr, not stdout](https://stackoverflow.com/questions/2990414/echo-that-outputs-to-stderr)
 
 
-<a name="manifest-filename-stem-i-e-without-the-path-or-extension" id="manifest-filename-stem-i-e-without-the-path-or-extension"></a>
+<a name="manifest-stem-filename-i-e-get-filename-sans-path-or-extension" id="manifest-stem-filename-i-e-get-filename-sans-path-or-extension"></a>
 
-### Filename stem, i.e. without the path or extension
+### Stem filename, i.e. get filename sans path or extension
 
 ```sh
 # Example

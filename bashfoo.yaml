@@ -25,20 +25,20 @@
 #
 ############################################################################################################
 
-"xargs (BSD) to pipe results into another command, one at a time":
+"`xargs` (BSD) to pipe results into another command, one at a time":
   date: 2020-06-18
   article:
     title: "Execute a command once per line of piped input?"
     url: https://unix.stackexchange.com/questions/7558/execute-a-command-once-per-line-of-piped-input
-  code:
+  code: |
     echo Alice Bob Charlie | xargs -I{} -n1 echo 'Hey, {} is a great name!'
-  output:
+  output: |
     Hey, Alice is a great name!
     Hey, Bob is a great name!
     Hey, Charlie is a great name!
 
 
-"convert image to favicon.ico":
+"`magick` convert image to favicon.ico":
   date: 2020-03-24
   article:
     title: Convert PNG to ICO
@@ -69,18 +69,18 @@
     - `-iname` is case-insensitive
 
 
-"echo to stderr":
+"`printf` to stderr":
   date: 2019-11-23
   article:
-    title: echo that outputs to stderr
+    title: print output to stderr, not stdout
     url: https://stackoverflow.com/questions/2990414/echo-that-outputs-to-stderr
   code: |
-    >&2 echo "hello error"
+    >&2 printf 'Error: %s\n' 'There was a problem' 'And another problem'
   output: |
-    hello error
+    Error: There was a problem
+    Error: And another problem
 
-
-"Filename stem, i.e. without the path or extension":
+"Stem filename, i.e. get filename sans path or extension":
   date: 2019-11-02
   article:
     title: Extract filename and extension in Bash
