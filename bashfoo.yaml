@@ -25,6 +25,32 @@
 #
 ############################################################################################################
 
+"`rsync` the contents of one directory into another":
+  date: 2020-08-06
+  article:
+    title: "How To Use Rsync to Sync Local and Remote Directories on a VPS"
+    url: https://www.digitalocean.com/community/tutorials/how-to-use-rsync-to-sync-local-and-remote-directories-on-a-vps
+  code: |
+    rsync -av src_dir/ target_dir
+  output: |
+    building file list ... done
+    created directory /target_dir
+    ./
+    .gitignore
+    README.md
+    static/media/
+    static/media/demos/
+    static/media/demos/find.mp4
+
+    sent 452477 bytes  received 2378 bytes  50909710.00 bytes/sec
+    total size is 472016  speedup is 1.00
+
+  notes: |
+    - only the source directory should have a trailing slash
+    - the `-v` flag makes for verbose output
+    - the `-n` flag does a dry run
+
+
 "`xargs` (BSD) to pipe results into another command, one at a time":
   date: 2020-06-18
   article:

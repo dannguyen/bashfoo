@@ -9,6 +9,7 @@ Dan Nguyen's personally curated list of bash/command-line commands and snippets
 
 ## TOC
 
+- [`rsync` the contents of one directory into another](#manifest--rsync-the-contents-of-one-directory-into-another)
 - [`xargs` (BSD) to pipe results into another command, one at a time](#manifest--xargs-bsd-to-pipe-results-into-another-command-one-at-a-time)
 - [`magick` convert image to favicon.ico](#manifest--magick-convert-image-to-favicon-ico)
 - [calculate total kilobytes of hard disk space for files with given extension(s)](#manifest-calculate-total-kilobytes-of-hard-disk-space-for-files-with-given-extension-s-)
@@ -23,6 +24,42 @@ Dan Nguyen's personally curated list of bash/command-line commands and snippets
 
 ------
 
+
+
+<a name="manifest--rsync-the-contents-of-one-directory-into-another" id="manifest--rsync-the-contents-of-one-directory-into-another"></a>
+
+### `rsync` the contents of one directory into another
+
+```sh
+# Example
+
+rsync -av src_dir/ target_dir
+```
+
+Output:
+
+```
+building file list ... done
+created directory /target_dir
+./
+.gitignore
+README.md
+static/media/
+static/media/demos/
+static/media/demos/find.mp4
+
+sent 452477 bytes  received 2378 bytes  50909710.00 bytes/sec
+total size is 472016  speedup is 1.00
+```
+
+**Reference**: [How To Use Rsync to Sync Local and Remote Directories on a VPS](https://www.digitalocean.com/community/tutorials/how-to-use-rsync-to-sync-local-and-remote-directories-on-a-vps)
+
+**Notes**: 
+
+
+- only the source directory should have a trailing slash
+- the `-v` flag makes for verbose output
+- the `-n` flag does a dry run
 
 
 <a name="manifest--xargs-bsd-to-pipe-results-into-another-command-one-at-a-time" id="manifest--xargs-bsd-to-pipe-results-into-another-command-one-at-a-time"></a>
