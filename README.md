@@ -24,7 +24,8 @@ Dan Nguyen's personally curated list of bash/command-line commands and snippets
 - [`xargs` (BSD) to pipe results into another command, one at a time](#manifest--xargs-bsd-to-pipe-results-into-another-command-one-at-a-time)
 - [calculate total kilobytes of hard disk space for files with given extension(s)](#manifest-calculate-total-kilobytes-of-hard-disk-space-for-files-with-given-extension-s-)
 
-------
+
+
 
 
 
@@ -35,7 +36,6 @@ Dan Nguyen's personally curated list of bash/command-line commands and snippets
 
 ```sh
 # Example
-
 find ./PATTERN -exec FOO BAR {} \;
 
 find PlainText/*.md -exec wc -l {} \;
@@ -51,7 +51,6 @@ find PlainText/*.md -exec wc -l {} \;
 
 ```sh
 # Example
-
 find START_DIR -type d -name "PATTERN"
 ```
 
@@ -65,7 +64,6 @@ find START_DIR -type d -name "PATTERN"
 
 ```sh
 # Example
-
 find . -name "foo*"
 ```
 
@@ -79,7 +77,6 @@ find . -name "foo*"
 
 ```sh
 # Example
-
 magick /tmp/testimage.png -background none -resize 128x128 -density 128x128 favicon.ico
 ```
 
@@ -93,7 +90,6 @@ magick /tmp/testimage.png -background none -resize 128x128 -density 128x128 favi
 
 ```sh
 # Example
-
 # MacOS
 pgrep -fil 'rails'
 
@@ -119,7 +115,6 @@ Output:
 
 ```sh
 # Example
-
 pkill -fil ipython
 ```
 
@@ -140,7 +135,6 @@ kill -15 90523
 
 ```sh
 # Example
-
 >&2 printf 'Error: %s\n' 'There was a problem' 'And another problem'
 ```
 
@@ -161,7 +155,6 @@ Error: And another problem
 
 ```sh
 # Example
-
 printf "SELECT name, id\n FROM datatable AS tx WHERE id > 100\n ORDER BY id ASC;" \
   | pygmentize -f rtf -l sql -O style=solarized-light \
   | pbcopy
@@ -183,7 +176,6 @@ printf "SELECT name, id\n FROM datatable AS tx WHERE id > 100\n ORDER BY id ASC;
 
 ```sh
 # Example
-
 rsync -av src_dir/ target_dir
 ```
 
@@ -220,7 +212,6 @@ total size is 472016  speedup is 1.00
 
 ```sh
 # Example
-
 fullname=/tmp/hello/world.txt
 newname="a_whole_new_$(basename ${fullname%.*})"
 echo $newname
@@ -242,7 +233,6 @@ a_whole_new_world
 
 ```sh
 # Example
-
 tar xzfv ARCHIVE.TAR.GZ
 ```
 
@@ -256,7 +246,6 @@ tar xzfv ARCHIVE.TAR.GZ
 
 ```sh
 # Example
-
 unzip -p schools.zip "*.csv" > schools.csv
 ```
 
@@ -268,7 +257,6 @@ unzip -p schools.zip "*.csv" > schools.csv
 
 ```sh
 # Example
-
 echo Alice Bob Charlie | xargs -I{} -n1 echo 'Hey, {} is a great name!'
 ```
 
@@ -290,7 +278,6 @@ Hey, Charlie is a great name!
 
 ```sh
 # Example
-
 echo $(find . -type f \
         \( -iname "*.csv" -o -iname '*.xls*' \) \
         -printf "(%k/1024)+" \

@@ -31,7 +31,7 @@ def make_toc(manifest):
     toc = "\n## TOC\n\n"
     for title, m in manifest.items():
         toc += f"- [{title}](#{anchorify(title)})\n"
-    toc += "\n------\n"
+    toc += "\n\n\n"
     return toc
 
 
@@ -45,7 +45,7 @@ def make_body(manifest):
         # title
         body += f"\n### {title}\n"
         # code
-        body += f"""\n```sh\n# Example\n\n{m['code']}```\n"""
+        body += f"""\n```sh\n# Example\n{m['code']}```\n"""
 
         # output
         if m.get("output"):
