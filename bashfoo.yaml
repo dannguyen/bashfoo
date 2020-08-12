@@ -25,6 +25,11 @@
 #
 ############################################################################################################
 
+"`unzip` only an archive's CSV files and pipe to stdout":
+  date: 2020-08-11
+  code: |
+    unzip -p schools.zip "*.csv" > schools.csv
+
 "`pygmentize` a code snippet into highlighted rich text that I can paste into GMail":
   date: 2020-08-11
   article:

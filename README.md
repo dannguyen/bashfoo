@@ -20,6 +20,7 @@ Dan Nguyen's personally curated list of bash/command-line commands and snippets
 - [`rsync` the contents of one directory into another](#manifest--rsync-the-contents-of-one-directory-into-another)
 - ['stem' a filename, i.e. get filename sans path or extension](#manifest--stem-a-filename-i-e-get-filename-sans-path-or-extension)
 - [`tar` extraction, verbose](#manifest--tar-extraction-verbose)
+- [`unzip` only an archive's CSV files and pipe to stdout](#manifest--unzip-only-an-archive-s-csv-files-and-pipe-to-stdout)
 - [`xargs` (BSD) to pipe results into another command, one at a time](#manifest--xargs-bsd-to-pipe-results-into-another-command-one-at-a-time)
 - [calculate total kilobytes of hard disk space for files with given extension(s)](#manifest-calculate-total-kilobytes-of-hard-disk-space-for-files-with-given-extension-s-)
 
@@ -246,6 +247,18 @@ tar xzfv ARCHIVE.TAR.GZ
 ```
 
 **Reference**: [The tar command explained](https://www.howtoforge.com/tutorial/linux-tar-command/)
+
+
+-------------------------------
+<a name="manifest--unzip-only-an-archive-s-csv-files-and-pipe-to-stdout" id="manifest--unzip-only-an-archive-s-csv-files-and-pipe-to-stdout"></a>
+
+### `unzip` only an archive's CSV files and pipe to stdout
+
+```sh
+# Example
+
+unzip -p schools.zip "*.csv" > schools.csv
+```
 
 
 -------------------------------
