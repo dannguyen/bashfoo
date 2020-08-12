@@ -25,7 +25,7 @@
 #
 ############################################################################################################
 
-"`pygmentize` a code snippet so I can paste higlighted rich text into GMail":
+"`pygmentize` a code snippet into highlighted rich text that I can paste into GMail":
   date: 2020-08-11
   article:
     title: Pygments Command Line Interface
@@ -121,7 +121,7 @@
     Error: There was a problem
     Error: And another problem
 
-"Stem filename, i.e. get filename sans path or extension":
+"'stem' a filename, i.e. get filename sans path or extension":
   date: 2019-11-02
   article:
     title: Extract filename and extension in Bash
