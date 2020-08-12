@@ -9,6 +9,7 @@ Dan Nguyen's personally curated list of bash/command-line commands and snippets
 
 ## TOC
 
+- [`pygmentize` a code snippet so I can paste higlighted rich text into GMail](#manifest--pygmentize-a-code-snippet-so-i-can-paste-higlighted-rich-text-into-gmail)
 - [`rsync` the contents of one directory into another](#manifest--rsync-the-contents-of-one-directory-into-another)
 - [`xargs` (BSD) to pipe results into another command, one at a time](#manifest--xargs-bsd-to-pipe-results-into-another-command-one-at-a-time)
 - [`magick` convert image to favicon.ico](#manifest--magick-convert-image-to-favicon-ico)
@@ -26,6 +27,29 @@ Dan Nguyen's personally curated list of bash/command-line commands and snippets
 
 
 
+-------------------------------
+<a name="manifest--pygmentize-a-code-snippet-so-i-can-paste-higlighted-rich-text-into-gmail" id="manifest--pygmentize-a-code-snippet-so-i-can-paste-higlighted-rich-text-into-gmail"></a>
+
+### `pygmentize` a code snippet so I can paste higlighted rich text into GMail
+
+```sh
+# Example
+
+printf "SELECT name, id\n FROM datatable AS tx WHERE id > 100\n ORDER BY id ASC;" \
+  | pygmentize -f rtf -l sql -O style=solarized-light \
+  | pbcopy
+```
+
+**Reference**: [Pygments Command Line Interface](https://pygments.org/docs/cmdline/)
+
+**Notes**: 
+
+
+- Use `-L` to list all styles, formatters, and lexers
+- Use `-o` to output to file
+
+
+-------------------------------
 <a name="manifest--rsync-the-contents-of-one-directory-into-another" id="manifest--rsync-the-contents-of-one-directory-into-another"></a>
 
 ### `rsync` the contents of one directory into another
@@ -62,6 +86,7 @@ total size is 472016  speedup is 1.00
 - the `-n` flag does a dry run
 
 
+-------------------------------
 <a name="manifest--xargs-bsd-to-pipe-results-into-another-command-one-at-a-time" id="manifest--xargs-bsd-to-pipe-results-into-another-command-one-at-a-time"></a>
 
 ### `xargs` (BSD) to pipe results into another command, one at a time
@@ -83,6 +108,7 @@ Hey, Charlie is a great name!
 **Reference**: [Execute a command once per line of piped input?](https://unix.stackexchange.com/questions/7558/execute-a-command-once-per-line-of-piped-input)
 
 
+-------------------------------
 <a name="manifest--magick-convert-image-to-favicon-ico" id="manifest--magick-convert-image-to-favicon-ico"></a>
 
 ### `magick` convert image to favicon.ico
@@ -96,6 +122,7 @@ magick /tmp/testimage.png -background none -resize 128x128 -density 128x128 favi
 **Reference**: [Convert PNG to ICO](https://imagemagick.org/discourse-server/viewtopic.php?t=36031)
 
 
+-------------------------------
 <a name="manifest-calculate-total-kilobytes-of-hard-disk-space-for-files-with-given-extension-s-" id="manifest-calculate-total-kilobytes-of-hard-disk-space-for-files-with-given-extension-s-"></a>
 
 ### calculate total kilobytes of hard disk space for files with given extension(s)
@@ -128,6 +155,7 @@ Output:
 - `-iname` is case-insensitive
 
 
+-------------------------------
 <a name="manifest--printf-to-stderr" id="manifest--printf-to-stderr"></a>
 
 ### `printf` to stderr
@@ -148,6 +176,7 @@ Error: And another problem
 **Reference**: [print output to stderr, not stdout](https://stackoverflow.com/questions/2990414/echo-that-outputs-to-stderr)
 
 
+-------------------------------
 <a name="manifest-stem-filename-i-e-get-filename-sans-path-or-extension" id="manifest-stem-filename-i-e-get-filename-sans-path-or-extension"></a>
 
 ### Stem filename, i.e. get filename sans path or extension
@@ -169,6 +198,7 @@ a_whole_new_world
 **Reference**: [Extract filename and extension in Bash](https://stackoverflow.com/questions/965053/extract-filename-and-extension-in-bash)
 
 
+-------------------------------
 <a name="manifest--pkill-using-a-file-pattern" id="manifest--pkill-using-a-file-pattern"></a>
 
 ### `pkill` using a file pattern
@@ -189,6 +219,7 @@ kill -15 90523
 **Reference**: [How to kill all processes with a given partial name?](https://stackoverflow.com/questions/8987037/how-to-kill-all-processes-with-a-given-partial-name)
 
 
+-------------------------------
 <a name="manifest--pgrep-and-get-all-process-info" id="manifest--pgrep-and-get-all-process-info"></a>
 
 ### `pgrep` and get all process info
@@ -214,6 +245,7 @@ Output:
 **Reference**: [How to get pgrep to display full process info](https://serverfault.com/questions/77162/how-to-get-pgrep-to-display-full-process-info)
 
 
+-------------------------------
 <a name="manifest--tar-extraction-verbose" id="manifest--tar-extraction-verbose"></a>
 
 ### `tar` extraction, verbose
@@ -227,6 +259,7 @@ tar xzfv ARCHIVE.TAR.GZ
 **Reference**: [The tar command explained](https://www.howtoforge.com/tutorial/linux-tar-command/)
 
 
+-------------------------------
 <a name="manifest--find-file-by-name" id="manifest--find-file-by-name"></a>
 
 ### `find` file by name
@@ -240,6 +273,7 @@ find . -name "foo*"
 **Reference**: [How can I recursively find all files in current and subfolders based on wildcard matching?](https://stackoverflow.com/questions/5905054/how-can-i-recursively-find-all-files-in-current-and-subfolders-based-on-wildcard)
 
 
+-------------------------------
 <a name="manifest--find-directory-name-recursively" id="manifest--find-directory-name-recursively"></a>
 
 ### `find` directory name recursively
@@ -253,6 +287,7 @@ find START_DIR -type d -name "PATTERN"
 **Reference**: [How can I recursively search for directory names with a particular string where the string is only part of the directory name](https://askubuntu.com/questions/153144/how-can-i-recursively-search-for-directory-names-with-a-particular-string-where)
 
 
+-------------------------------
 <a name="manifest--find-and-execute-command-on-each-file" id="manifest--find-and-execute-command-on-each-file"></a>
 
 ### `find` and execute command on each file

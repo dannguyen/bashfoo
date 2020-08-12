@@ -35,7 +35,7 @@ def make_body(manifest):
     body = "\n"
     for title, m in manifest.items():
         # anchor
-        body += "\n\n"
+        body += "\n\n-------------------------------\n"
         body += (f"""<a name="{anchorify(title)}" id="{anchorify(title)}"></a>\n""")
 
         # title

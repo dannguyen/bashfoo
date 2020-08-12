@@ -25,6 +25,21 @@
 #
 ############################################################################################################
 
+"`pygmentize` a code snippet so I can paste higlighted rich text into GMail":
+  date: 2020-08-11
+  article:
+    title: Pygments Command Line Interface
+    url: https://pygments.org/docs/cmdline/
+  code: |
+    printf "SELECT name, id\n FROM datatable AS tx WHERE id > 100\n ORDER BY id ASC;" \
+      | pygmentize -f rtf -l sql -O style=solarized-light \
+      | pbcopy
+
+  notes: |
+    - Use `-L` to list all styles, formatters, and lexers
+    - Use `-o` to output to file
+
+
 "`rsync` the contents of one directory into another":
   date: 2020-08-06
   article:
