@@ -9,6 +9,7 @@ Dan Nguyen's personally curated list of bash/command-line commands and snippets
 
 ## TOC
 
+- [`ffmpeg` encode .mkv video to .mp4](#manifest--ffmpeg-encode-mkv-video-to-mp4)
 - [`find` and execute command on each file](#manifest--find-and-execute-command-on-each-file)
 - [`find` directory name recursively](#manifest--find-directory-name-recursively)
 - [`find` file by name](#manifest--find-file-by-name)
@@ -27,6 +28,19 @@ Dan Nguyen's personally curated list of bash/command-line commands and snippets
 
 
 
+
+
+-------------------------------
+<a name="manifest--ffmpeg-encode-mkv-video-to-mp4" id="manifest--ffmpeg-encode-mkv-video-to-mp4"></a>
+
+### `ffmpeg` encode .mkv video to .mp4
+
+```sh
+# Example
+ffmpeg -i input.mkv -acodec aac -vcodec libx264 output.mp4
+```
+
+**Reference**: [How can I convert an m4v video to a widely viewable format using ffmpeg?](https://superuser.com/a/462112/512499)
 
 
 -------------------------------

@@ -25,6 +25,15 @@
 #
 ############################################################################################################
 
+"`ffmpeg` encode .mkv video to .mp4":
+  date: 2020-11-12
+  code: |
+    ffmpeg -i input.mkv -acodec aac -vcodec libx264 output.mp4
+  article:
+    title: "How can I convert an m4v video to a widely viewable format using ffmpeg?"
+    url: https://superuser.com/a/462112/512499
+
+
 "`unzip` only an archive's CSV files and pipe to stdout":
   date: 2020-08-11
   code: |
