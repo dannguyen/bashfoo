@@ -23,7 +23,8 @@ Dan Nguyen's personally curated list of bash/command-line commands and snippets
 - [`tar` extraction, verbose](#manifest--tar-extraction-verbose)
 - [`unzip` only an archive's CSV files and pipe to stdout](#manifest--unzip-only-an-archive-s-csv-files-and-pipe-to-stdout)
 - [`xargs` (BSD) to pipe results into another command, one at a time](#manifest--xargs-bsd-to-pipe-results-into-another-command-one-at-a-time)
-- [calculate total kilobytes of hard disk space for files with given extension(s)](#manifest-calculate-total-kilobytes-of-hard-disk-space-for-files-with-given-extension-s-)
+- [Calculate total kilobytes of hard disk space for files with given extension(s)](#manifest-calculate-total-kilobytes-of-hard-disk-space-for-files-with-given-extension-s-)
+- [List the top 10 subdirectories in order of most recently modified](#manifest-list-the-top-10-subdirectories-in-order-of-most-recently-modified)
 
 
 
@@ -288,7 +289,7 @@ Hey, Charlie is a great name!
 -------------------------------
 <a name="manifest-calculate-total-kilobytes-of-hard-disk-space-for-files-with-given-extension-s-" id="manifest-calculate-total-kilobytes-of-hard-disk-space-for-files-with-given-extension-s-"></a>
 
-### calculate total kilobytes of hard disk space for files with given extension(s)
+### Calculate total kilobytes of hard disk space for files with given extension(s)
 
 ```sh
 # Example
@@ -315,3 +316,43 @@ Output:
 - use `-printf "%s+"` to print size by bytes
 - `2>/dev/null` hides error messages
 - `-iname` is case-insensitive
+
+
+-------------------------------
+<a name="manifest-list-the-top-10-subdirectories-in-order-of-most-recently-modified" id="manifest-list-the-top-10-subdirectories-in-order-of-most-recently-modified"></a>
+
+### List the top 10 subdirectories in order of most recently modified
+
+```sh
+# Example
+find ~/a -mindepth 1 -maxdepth 2 -type d \
+    -not -name '_*' -not -name '.*' \
+    -print0
+  | xargs -0 -n1 -I{} \
+      stat  -f '%Sm %N' -t '%Y-%m-%d %H:%M:%S' {} \
+  | sort -rn | head -n10
+
+# GNU variant, e.g. with gnu-coretools on macOS
+gfind . -mindepth 1 -maxdepth 2 -type d \
+    -not -name '_*' -not -name '.*'  \
+    -printf '%T+ %p\n'  \
+  | sort -rn \
+  | head -n 10
+```
+
+Output:
+
+```
+2020-11-27 14:05:45 /Users/dan/Downloads/r-book
+2020-09-25 11:39:45 /Users/dan/Desktop/sf-shelter-data
+2020-06-18 22:45:15 /Users/dan/Downloads/journalism-syllabi
+2020-08-26 20:16:55 /Users/dan/Desktop/vocal-samples
+2020-07-09 14:48:38 /Users/dan/Downloads/svelte-project
+2020-07-09 14:29:43 /Users/dan/Desktop/matplotlibguide
+2020-05-29 22:00:28 /Users/dan/Downloads/buzzfeed-archives
+2020-03-18 14:57:03 /Users/dan/Downloads/transcribe-texts
+2020-01-18 05:55:32 /Users/dan/Desktop/oldstuff
+2020-01-17 16:43:39 /Users/dan/Desktop/random_images
+```
+
+**Reference**: [How to recursively find and list the latest modified files in a directory with subdirectories and times (my answer](https://stackoverflow.com/questions/5566310/how-to-recursively-find-and-list-the-latest-modified-files-in-a-directory-with-s/65588958#65588958)
