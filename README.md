@@ -170,9 +170,15 @@ Error: And another problem
 
 ```sh
 # Example
+# copying formatted code to clipboard
 printf "SELECT name, id\n FROM datatable AS tx WHERE id > 100\n ORDER BY id ASC;" \
-  | pygmentize -f rtf -l sql -O style=solarized-light \
+  | pygmentize -f rtf -l sql -O style=perldoc \
   | pbcopy
+
+# making an image file (can't send to pbcopy)
+printf "SELECT 1 FROM table;" \
+  | pygmentize -f png -l sql \
+  > /tmp/pygsql.png
 ```
 
 **Reference**: [Pygments Command Line Interface](https://pygments.org/docs/cmdline/)
@@ -180,8 +186,11 @@ printf "SELECT name, id\n FROM datatable AS tx WHERE id > 100\n ORDER BY id ASC;
 **Notes**: 
 
 
+- install via pip: `pip install --upgrade Pygments`
 - Use `-L` to list all styles, formatters, and lexers
+- style gallery: http://richleland.github.io/pygments-css/
 - Use `-o` to output to file
+- Use `-O` to set options, like `style=solarized-light`
 
 
 -------------------------------

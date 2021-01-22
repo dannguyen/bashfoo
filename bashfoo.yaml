@@ -75,17 +75,27 @@
 
 "`pygmentize` a code snippet into highlighted rich text that I can paste into GMail":
   date: 2020-08-11
+  updated_at: 2021-01-21
   article:
     title: Pygments Command Line Interface
     url: https://pygments.org/docs/cmdline/
   code: |
+    # copying formatted code to clipboard
     printf "SELECT name, id\n FROM datatable AS tx WHERE id > 100\n ORDER BY id ASC;" \
-      | pygmentize -f rtf -l sql -O style=solarized-light \
+      | pygmentize -f rtf -l sql -O style=perldoc \
       | pbcopy
 
+    # making an image file (can't send to pbcopy)
+    printf "SELECT 1 FROM table;" \
+      | pygmentize -f png -l sql \
+      > /tmp/pygsql.png
+
   notes: |
+    - install via pip: `pip install --upgrade Pygments`
     - Use `-L` to list all styles, formatters, and lexers
+    - style gallery: http://richleland.github.io/pygments-css/
     - Use `-o` to output to file
+    - Use `-O` to set options, like `style=solarized-light`
 
 
 "`rsync` the contents of one directory into another":
