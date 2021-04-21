@@ -14,6 +14,7 @@ Dan Nguyen's personally curated list of bash/command-line commands and snippets
 - [`find` directory name recursively](#manifest--find-directory-name-recursively)
 - [`find` file by name](#manifest--find-file-by-name)
 - [`magick` convert image to favicon.ico](#manifest--magick-convert-image-to-favicon-ico)
+- [`pandoc` convert a Markdown file into a Word docx](#manifest--pandoc-convert-a-markdown-file-into-a-word-docx)
 - [`pgrep` and get all process info](#manifest--pgrep-and-get-all-process-info)
 - [`pkill` using a file pattern](#manifest--pkill-using-a-file-pattern)
 - [`printf` to stderr](#manifest--printf-to-stderr)
@@ -96,6 +97,19 @@ magick /tmp/testimage.png -background none -resize 128x128 -density 128x128 favi
 ```
 
 **Reference**: [Convert PNG to ICO](https://imagemagick.org/discourse-server/viewtopic.php?t=36031)
+
+
+-------------------------------
+<a name="manifest--pandoc-convert-a-markdown-file-into-a-word-docx" id="manifest--pandoc-convert-a-markdown-file-into-a-word-docx"></a>
+
+### `pandoc` convert a Markdown file into a Word docx
+
+```sh
+# Example
+pandoc README.md -f markdown -t docx -o README.docx
+```
+
+**Reference**: [Convert Markdown into a Word Document](https://mrjoe.uk/convert-markdown-to-word-document/)
 
 
 -------------------------------

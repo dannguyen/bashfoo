@@ -26,6 +26,15 @@
 ############################################################################################################
 
 
+"`pandoc` convert a Markdown file into a Word docx":
+  date: 2021-04-21
+  code: |
+    pandoc README.md -f markdown -t docx -o README.docx
+  article:
+    title: "Convert Markdown into a Word Document"
+    url: https://mrjoe.uk/convert-markdown-to-word-document/
+
+
 "List the top 10 subdirectories in order of most recently modified":
   date: 2020-01-05
   code: |
