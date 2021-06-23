@@ -9,6 +9,7 @@ Dan Nguyen's personally curated list of bash/command-line commands and snippets
 
 ## TOC
 
+- [`ffmpeg` downscale and optimize a video](#manifest--ffmpeg-downscale-and-optimize-a-video)
 - [`ffmpeg` encode .mkv video to .mp4](#manifest--ffmpeg-encode-mkv-video-to-mp4)
 - [`find` and execute command on each file](#manifest--find-and-execute-command-on-each-file)
 - [`find` directory name recursively](#manifest--find-directory-name-recursively)
@@ -30,6 +31,21 @@ Dan Nguyen's personally curated list of bash/command-line commands and snippets
 
 
 
+
+
+-------------------------------
+<a name="manifest--ffmpeg-downscale-and-optimize-a-video" id="manifest--ffmpeg-downscale-and-optimize-a-video"></a>
+
+### `ffmpeg` downscale and optimize a video
+
+```sh
+# Example
+ffmpeg -i invideo.mp4 \
+  -vcodec libx264 -crf 28 -vf scale=2000:-2 \
+  outvideo.mp4
+```
+
+**Reference**: [How can I reduce a video's size with ffmpeg?](https://unix.stackexchange.com/questions/28803/how-can-i-reduce-a-videos-size-with-ffmpeg)
 
 
 -------------------------------

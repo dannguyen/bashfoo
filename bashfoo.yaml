@@ -26,6 +26,16 @@
 ############################################################################################################
 
 
+"`ffmpeg` downscale and optimize a video":
+  date: 2021-06-21
+  code: |
+    ffmpeg -i invideo.mp4 \
+      -vcodec libx264 -crf 28 -vf scale=2000:-2 \
+      outvideo.mp4
+  article:
+    title: "How can I reduce a video's size with ffmpeg?"
+    url: https://unix.stackexchange.com/questions/28803/how-can-i-reduce-a-videos-size-with-ffmpeg
+
 "`pandoc` convert a Markdown file into a Word docx":
   date: 2021-04-21
   code: |
