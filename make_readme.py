@@ -52,10 +52,11 @@ def make_body(manifest):
             body += "\nOutput:\n"
             body += f"""\n```\n{m['output']}```\n"""
 
-        if m.get("article"):
-            a = m["article"]
-            body += "\n**Reference**: "
-            body += f"[{a['title']}]({a['url']})\n"
+        if m.get("articles"):
+            articles = m["articles"]
+            body += "\n**References**: \n\n"
+            for a in articles:
+                body += f"- [{a['title']}]({a['url']})\n"
 
         if m.get("notes"):
             n = m["notes"]

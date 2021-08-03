@@ -9,9 +9,13 @@ Dan Nguyen's personally curated list of bash/command-line commands and snippets
 
 ## TOC
 
+- [`date` add a UTC timestamp in ISO-8601 format to a filename](#manifest--date-add-a-utc-timestamp-in-iso-8601-format-to-a-filename)
+- [`ffmpeg` convert a video to gif](#manifest--ffmpeg-convert-a-video-to-gif)
 - [`ffmpeg` downscale and optimize a video](#manifest--ffmpeg-downscale-and-optimize-a-video)
 - [`ffmpeg` encode .mkv video to .mp4](#manifest--ffmpeg-encode-mkv-video-to-mp4)
 - [`find` and execute command on each file](#manifest--find-and-execute-command-on-each-file)
+- [`find` and list the top 10 most recently modified subdirectories](#manifest--find-and-list-the-top-10-most-recently-modified-subdirectories)
+- [`find` and tally total kilobytes of hard disk space for files with given extension(s)](#manifest--find-and-tally-total-kilobytes-of-hard-disk-space-for-files-with-given-extension-s-)
 - [`find` directory name recursively](#manifest--find-directory-name-recursively)
 - [`find` file by name](#manifest--find-file-by-name)
 - [`magick` convert image to favicon.ico](#manifest--magick-convert-image-to-favicon-ico)
@@ -21,16 +25,66 @@ Dan Nguyen's personally curated list of bash/command-line commands and snippets
 - [`printf` to stderr](#manifest--printf-to-stderr)
 - [`pygmentize` a code snippet into highlighted rich text that I can paste into GMail](#manifest--pygmentize-a-code-snippet-into-highlighted-rich-text-that-i-can-paste-into-gmail)
 - [`rsync` the contents of one directory into another](#manifest--rsync-the-contents-of-one-directory-into-another)
-- ['stem' a filename, i.e. get filename sans path or extension](#manifest--stem-a-filename-i-e-get-filename-sans-path-or-extension)
+- [`ssh-add` a new SSH key to system ssh-agent (macOS)](#manifest--ssh-add-a-new-ssh-key-to-system-ssh-agent-macos-)
+- [`stem` a filename, i.e. get filename sans path or extension](#manifest--stem-a-filename-i-e-get-filename-sans-path-or-extension)
 - [`tar` extraction, verbose](#manifest--tar-extraction-verbose)
 - [`unzip` only an archive's CSV files and pipe to stdout](#manifest--unzip-only-an-archive-s-csv-files-and-pipe-to-stdout)
 - [`xargs` (BSD) to pipe results into another command, one at a time](#manifest--xargs-bsd-to-pipe-results-into-another-command-one-at-a-time)
-- [Calculate total kilobytes of hard disk space for files with given extension(s)](#manifest-calculate-total-kilobytes-of-hard-disk-space-for-files-with-given-extension-s-)
-- [List the top 10 subdirectories in order of most recently modified](#manifest-list-the-top-10-subdirectories-in-order-of-most-recently-modified)
 
 
 
 
+
+
+-------------------------------
+<a name="manifest--date-add-a-utc-timestamp-in-iso-8601-format-to-a-filename" id="manifest--date-add-a-utc-timestamp-in-iso-8601-format-to-a-filename"></a>
+
+### `date` add a UTC timestamp in ISO-8601 format to a filename
+
+```sh
+# Example
+# Just the current UTC date using GNU date, i.e. gdate on macOS
+printf "mydata_%s.csv\n" $(gdate --utc -I)
+# >>>> mydata_2021-08-03.csv
+
+# UTC date with hours+minutes, GNU and BSD compatible
+printf "mydata_%s.csv\n" $(date -u +"%Y-%m-%d-%H%M")
+# >>>> mydata_2021-08-03-1248.csv
+```
+
+**References**: 
+
+- [date command --iso-8601 option](https://unix.stackexchange.com/questions/164826/date-command-iso-8601-option)
+
+
+-------------------------------
+<a name="manifest--ffmpeg-convert-a-video-to-gif" id="manifest--ffmpeg-convert-a-video-to-gif"></a>
+
+### `ffmpeg` convert a video to gif
+
+```sh
+# Example
+# minimalist conversion (infinite looping GIF, i.e. -loop=0, is the default)
+ffmpeg -i input.mp4 output.gif
+
+# yes-to-overwrite, 15 frames-per-second
+# scaled to 225px wide w/ lanczos scaler, and non-looping
+ffmpeg -y -i input.mp4 \
+  -vf "fps=15,scale=225:-1:flags=lanczos" -loop -1 \
+  output.gif
+
+# generate a palette png file that favors areas with motion
+ffmpeg -y -i input.mp4 -vf "palettegen=stats_mode=diff" palette.png
+
+# and then use that palette png
+ffmpeg -y -i input.mp4 -i palette.png -lavfi paletteuse output.gif
+```
+
+**References**: 
+
+- [How do I convert a video to GIF using ffmpeg, with reasonable quality?](https://superuser.com/a/556031)
+- [Optimizing GIFS with FFMPEG](https://cassidy.codes/blog/2017/04/25/ffmpeg-frames-to-gif-optimization/)
+- [High quality GIF with FFmpeg](https://web.archive.org/web/20200612084604/http://blog.pkh.me/p/21-high-quality-gif-with-ffmpeg.html)
 
 
 -------------------------------
@@ -45,7 +99,9 @@ ffmpeg -i invideo.mp4 \
   outvideo.mp4
 ```
 
-**Reference**: [How can I reduce a video's size with ffmpeg?](https://unix.stackexchange.com/questions/28803/how-can-i-reduce-a-videos-size-with-ffmpeg)
+**References**: 
+
+- [How can I reduce a video's size with ffmpeg?](https://unix.stackexchange.com/questions/28803/how-can-i-reduce-a-videos-size-with-ffmpeg)
 
 
 -------------------------------
@@ -58,7 +114,9 @@ ffmpeg -i invideo.mp4 \
 ffmpeg -i input.mkv -acodec aac -vcodec libx264 output.mp4
 ```
 
-**Reference**: [How can I convert an m4v video to a widely viewable format using ffmpeg?](https://superuser.com/a/462112/512499)
+**References**: 
+
+- [How can I convert an m4v video to a widely viewable format using ffmpeg?](https://superuser.com/a/462112/512499)
 
 
 -------------------------------
@@ -73,7 +131,85 @@ find ./PATTERN -exec FOO BAR {} \;
 find PlainText/*.md -exec wc -l {} \;
 ```
 
-**Reference**: [How to run find -exec?](https://unix.stackexchange.com/questions/12902/how-to-run-find-exec)
+**References**: 
+
+- [How to run find -exec?](https://unix.stackexchange.com/questions/12902/how-to-run-find-exec)
+
+
+-------------------------------
+<a name="manifest--find-and-list-the-top-10-most-recently-modified-subdirectories" id="manifest--find-and-list-the-top-10-most-recently-modified-subdirectories"></a>
+
+### `find` and list the top 10 most recently modified subdirectories
+
+```sh
+# Example
+find ~/a -mindepth 1 -maxdepth 2 -type d \
+    -not -name '_*' -not -name '.*' \
+    -print0
+  | xargs -0 -n1 -I{} \
+      stat  -f '%Sm %N' -t '%Y-%m-%d %H:%M:%S' {} \
+  | sort -rn | head -n10
+
+# GNU variant, e.g. with gnu-coretools on macOS
+gfind . -mindepth 1 -maxdepth 2 -type d \
+    -not -name '_*' -not -name '.*'  \
+    -printf '%T+ %p\n'  \
+  | sort -rn \
+  | head -n 10
+```
+
+Output:
+
+```
+2020-11-27 14:05:45 /Users/dan/Downloads/r-book
+2020-09-25 11:39:45 /Users/dan/Desktop/sf-shelter-data
+2020-06-18 22:45:15 /Users/dan/Downloads/journalism-syllabi
+2020-08-26 20:16:55 /Users/dan/Desktop/vocal-samples
+2020-07-09 14:48:38 /Users/dan/Downloads/svelte-project
+2020-07-09 14:29:43 /Users/dan/Desktop/matplotlibguide
+2020-05-29 22:00:28 /Users/dan/Downloads/buzzfeed-archives
+2020-03-18 14:57:03 /Users/dan/Downloads/transcribe-texts
+2020-01-18 05:55:32 /Users/dan/Desktop/oldstuff
+2020-01-17 16:43:39 /Users/dan/Desktop/random_images
+```
+
+**References**: 
+
+- [How to recursively find and list the latest modified files in a directory with subdirectories and times (my answer](https://stackoverflow.com/questions/5566310/how-to-recursively-find-and-list-the-latest-modified-files-in-a-directory-with-s/65588958#65588958)
+
+
+-------------------------------
+<a name="manifest--find-and-tally-total-kilobytes-of-hard-disk-space-for-files-with-given-extension-s-" id="manifest--find-and-tally-total-kilobytes-of-hard-disk-space-for-files-with-given-extension-s-"></a>
+
+### `find` and tally total kilobytes of hard disk space for files with given extension(s)
+
+```sh
+# Example
+echo $(find . -type f \
+        \( -iname "*.csv" -o -iname '*.xls*' \) \
+        -printf "(%k/1024)+" \
+        2>/dev/null; \
+        echo 0;) | bc
+```
+
+Output:
+
+```
+15732
+```
+
+**References**: 
+
+- [Find the total size of certain files within a directory branch](https://unix.stackexchange.com/questions/41550/find-the-total-size-of-certain-files-within-a-directory-branch/148472)
+
+**Notes**: 
+
+
+
+- Requires the use of gnu-find (gfind on my MacOS)
+- use `-printf "%s+"` to print size by bytes
+- `2>/dev/null` hides error messages
+- `-iname` is case-insensitive
 
 
 -------------------------------
@@ -86,7 +222,9 @@ find PlainText/*.md -exec wc -l {} \;
 find START_DIR -type d -name "PATTERN"
 ```
 
-**Reference**: [How can I recursively search for directory names with a particular string where the string is only part of the directory name](https://askubuntu.com/questions/153144/how-can-i-recursively-search-for-directory-names-with-a-particular-string-where)
+**References**: 
+
+- [How can I recursively search for directory names with a particular string where the string is only part of the directory name](https://askubuntu.com/questions/153144/how-can-i-recursively-search-for-directory-names-with-a-particular-string-where)
 
 
 -------------------------------
@@ -99,7 +237,9 @@ find START_DIR -type d -name "PATTERN"
 find . -name "foo*"
 ```
 
-**Reference**: [How can I recursively find all files in current and subfolders based on wildcard matching?](https://stackoverflow.com/questions/5905054/how-can-i-recursively-find-all-files-in-current-and-subfolders-based-on-wildcard)
+**References**: 
+
+- [How can I recursively find all files in current and subfolders based on wildcard matching?](https://stackoverflow.com/questions/5905054/how-can-i-recursively-find-all-files-in-current-and-subfolders-based-on-wildcard)
 
 
 -------------------------------
@@ -112,7 +252,9 @@ find . -name "foo*"
 magick /tmp/testimage.png -background none -resize 128x128 -density 128x128 favicon.ico
 ```
 
-**Reference**: [Convert PNG to ICO](https://imagemagick.org/discourse-server/viewtopic.php?t=36031)
+**References**: 
+
+- [Convert PNG to ICO](https://imagemagick.org/discourse-server/viewtopic.php?t=36031)
 
 
 -------------------------------
@@ -125,7 +267,9 @@ magick /tmp/testimage.png -background none -resize 128x128 -density 128x128 favi
 pandoc README.md -f markdown -t docx -o README.docx
 ```
 
-**Reference**: [Convert Markdown into a Word Document](https://mrjoe.uk/convert-markdown-to-word-document/)
+**References**: 
+
+- [Convert Markdown into a Word Document](https://mrjoe.uk/convert-markdown-to-word-document/)
 
 
 -------------------------------
@@ -150,7 +294,9 @@ Output:
 47517 rails worker[0] RBENV_VERSION=2.5.1 TERMINAL_FONT=Monaco
 ```
 
-**Reference**: [How to get pgrep to display full process info](https://serverfault.com/questions/77162/how-to-get-pgrep-to-display-full-process-info)
+**References**: 
+
+- [How to get pgrep to display full process info](https://serverfault.com/questions/77162/how-to-get-pgrep-to-display-full-process-info)
 
 
 -------------------------------
@@ -170,7 +316,9 @@ kill -15 90396
 kill -15 90523
 ```
 
-**Reference**: [How to kill all processes with a given partial name?](https://stackoverflow.com/questions/8987037/how-to-kill-all-processes-with-a-given-partial-name)
+**References**: 
+
+- [How to kill all processes with a given partial name?](https://stackoverflow.com/questions/8987037/how-to-kill-all-processes-with-a-given-partial-name)
 
 
 -------------------------------
@@ -190,7 +338,9 @@ Error: There was a problem
 Error: And another problem
 ```
 
-**Reference**: [print output to stderr, not stdout](https://stackoverflow.com/questions/2990414/echo-that-outputs-to-stderr)
+**References**: 
+
+- [print output to stderr, not stdout](https://stackoverflow.com/questions/2990414/echo-that-outputs-to-stderr)
 
 
 -------------------------------
@@ -211,7 +361,9 @@ printf "SELECT 1 FROM table;" \
   > /tmp/pygsql.png
 ```
 
-**Reference**: [Pygments Command Line Interface](https://pygments.org/docs/cmdline/)
+**References**: 
+
+- [Pygments Command Line Interface](https://pygments.org/docs/cmdline/)
 
 **Notes**: 
 
@@ -249,7 +401,9 @@ sent 452477 bytes  received 2378 bytes  50909710.00 bytes/sec
 total size is 472016  speedup is 1.00
 ```
 
-**Reference**: [How To Use Rsync to Sync Local and Remote Directories on a VPS](https://www.digitalocean.com/community/tutorials/how-to-use-rsync-to-sync-local-and-remote-directories-on-a-vps)
+**References**: 
+
+- [How To Use Rsync to Sync Local and Remote Directories on a VPS](https://www.digitalocean.com/community/tutorials/how-to-use-rsync-to-sync-local-and-remote-directories-on-a-vps)
 
 **Notes**: 
 
@@ -260,9 +414,72 @@ total size is 472016  speedup is 1.00
 
 
 -------------------------------
+<a name="manifest--ssh-add-a-new-ssh-key-to-system-ssh-agent-macos-" id="manifest--ssh-add-a-new-ssh-key-to-system-ssh-agent-macos-"></a>
+
+### `ssh-add` a new SSH key to system ssh-agent (macOS)
+
+```sh
+# Example
+# put this in bash profile
+eval "$(ssh-agent -s)"
+
+# note: use -t rsa -b 4096 if system doesn't support Ed25519 algorithm
+ssh-keygen -t ed25519 -C "justme@example.com" \
+  -f ~/.ssh/myid_as_ed25519
+
+# add key to ssh-agent and store passprhase in keychain
+$ ssh-add -K ~/.ssh/myid_as_ed25519
+```
+
+Output:
+
+```
+Agent pid 59566
+
+Generating public/private ed25519 key pair.
+Enter passphrase (empty for no passphrase):
+Enter same passphrase again:
+Your identification has been saved in /Users/justme/.ssh/myid_as_ed25519.
+Your public key has been saved in /Users/justme/.ssh/myid_as_ed25519.pub.
+The key fingerprint is:
+SHA256:9zABCDEx9sp+zyxTestTest+LoremIpsum justme@example.com
+The key's randomart image is:
++--[ED25519 256]--+
+|.  ..     .   .o.|
+|     .o.. .o .o .|
+|                 |
+|     ..o + + = * |
+|                 |
+|B       o        |
+|    o... o . . .+|
+|     ...T o   +o.|
+|     oo.  .  .== |
++----[SHA256]-----+
+```
+
+**References**: 
+
+- [Generating a new SSH key and adding it to the ssh-agent](https://docs.github.com/en/github/authenticating-to-github/connecting-to-github-with-ssh/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent)
+- [How can I change the directory that ssh-keygen outputs to?](https://superuser.com/questions/1004254/how-can-i-change-the-directory-that-ssh-keygen-outputs-to)
+
+**Notes**: 
+
+
+May need to edit ~/.ssh/config to point to non traditional IdentityFile location, e.g.
+
+```
+Host *
+ AddKeysToAgent yes
+ UseKeychain yes
+ IdentityFile ~/.ssh/id_rsa
+ IdentityFile ~/.ssh/myid_as_ed25519
+```
+
+
+-------------------------------
 <a name="manifest--stem-a-filename-i-e-get-filename-sans-path-or-extension" id="manifest--stem-a-filename-i-e-get-filename-sans-path-or-extension"></a>
 
-### 'stem' a filename, i.e. get filename sans path or extension
+### `stem` a filename, i.e. get filename sans path or extension
 
 ```sh
 # Example
@@ -277,7 +494,9 @@ Output:
 a_whole_new_world
 ```
 
-**Reference**: [Extract filename and extension in Bash](https://stackoverflow.com/questions/965053/extract-filename-and-extension-in-bash)
+**References**: 
+
+- [Extract filename and extension in Bash](https://stackoverflow.com/questions/965053/extract-filename-and-extension-in-bash)
 
 
 -------------------------------
@@ -290,7 +509,9 @@ a_whole_new_world
 tar xzfv ARCHIVE.TAR.GZ
 ```
 
-**Reference**: [The tar command explained](https://www.howtoforge.com/tutorial/linux-tar-command/)
+**References**: 
+
+- [The tar command explained](https://www.howtoforge.com/tutorial/linux-tar-command/)
 
 
 -------------------------------
@@ -322,76 +543,6 @@ Hey, Bob is a great name!
 Hey, Charlie is a great name!
 ```
 
-**Reference**: [Execute a command once per line of piped input?](https://unix.stackexchange.com/questions/7558/execute-a-command-once-per-line-of-piped-input)
+**References**: 
 
-
--------------------------------
-<a name="manifest-calculate-total-kilobytes-of-hard-disk-space-for-files-with-given-extension-s-" id="manifest-calculate-total-kilobytes-of-hard-disk-space-for-files-with-given-extension-s-"></a>
-
-### Calculate total kilobytes of hard disk space for files with given extension(s)
-
-```sh
-# Example
-echo $(find . -type f \
-        \( -iname "*.csv" -o -iname '*.xls*' \) \
-        -printf "(%k/1024)+" \
-        2>/dev/null; \
-        echo 0;) | bc
-```
-
-Output:
-
-```
-15732
-```
-
-**Reference**: [Find the total size of certain files within a directory branch](https://unix.stackexchange.com/questions/41550/find-the-total-size-of-certain-files-within-a-directory-branch/148472)
-
-**Notes**: 
-
-
-
-- Requires the use of gnu-find (gfind on my MacOS)
-- use `-printf "%s+"` to print size by bytes
-- `2>/dev/null` hides error messages
-- `-iname` is case-insensitive
-
-
--------------------------------
-<a name="manifest-list-the-top-10-subdirectories-in-order-of-most-recently-modified" id="manifest-list-the-top-10-subdirectories-in-order-of-most-recently-modified"></a>
-
-### List the top 10 subdirectories in order of most recently modified
-
-```sh
-# Example
-find ~/a -mindepth 1 -maxdepth 2 -type d \
-    -not -name '_*' -not -name '.*' \
-    -print0
-  | xargs -0 -n1 -I{} \
-      stat  -f '%Sm %N' -t '%Y-%m-%d %H:%M:%S' {} \
-  | sort -rn | head -n10
-
-# GNU variant, e.g. with gnu-coretools on macOS
-gfind . -mindepth 1 -maxdepth 2 -type d \
-    -not -name '_*' -not -name '.*'  \
-    -printf '%T+ %p\n'  \
-  | sort -rn \
-  | head -n 10
-```
-
-Output:
-
-```
-2020-11-27 14:05:45 /Users/dan/Downloads/r-book
-2020-09-25 11:39:45 /Users/dan/Desktop/sf-shelter-data
-2020-06-18 22:45:15 /Users/dan/Downloads/journalism-syllabi
-2020-08-26 20:16:55 /Users/dan/Desktop/vocal-samples
-2020-07-09 14:48:38 /Users/dan/Downloads/svelte-project
-2020-07-09 14:29:43 /Users/dan/Desktop/matplotlibguide
-2020-05-29 22:00:28 /Users/dan/Downloads/buzzfeed-archives
-2020-03-18 14:57:03 /Users/dan/Downloads/transcribe-texts
-2020-01-18 05:55:32 /Users/dan/Desktop/oldstuff
-2020-01-17 16:43:39 /Users/dan/Desktop/random_images
-```
-
-**Reference**: [How to recursively find and list the latest modified files in a directory with subdirectories and times (my answer](https://stackoverflow.com/questions/5566310/how-to-recursively-find-and-list-the-latest-modified-files-in-a-directory-with-s/65588958#65588958)
+- [Execute a command once per line of piped input?](https://unix.stackexchange.com/questions/7558/execute-a-command-once-per-line-of-piped-input)
