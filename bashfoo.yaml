@@ -197,23 +197,39 @@
   articles:
     - title: Pygments Command Line Interface
       url: https://pygments.org/docs/cmdline/
+    - title: Pygments formatting options
+      url: https://pygments.org/docs/formatters/
+    - title: Pygments style gallery
+      url: http://richleland.github.io/pygments-css/
   code: |
-    # copying formatted code to clipboard
-    printf "SELECT name, id\n FROM datatable AS tx WHERE id > 100\n ORDER BY id ASC;" \
-      | pygmentize -f rtf -l sql -O style=perldoc \
+    # Converting plaintext to rich-text format and copying to clipboard
+    printf "SELECT 1, 2, 3 \nFROM table;" \
+      | pygmentize -f rtf -l sql \
       | pbcopy
 
-    # making an image file (can't send to pbcopy)
-    printf "SELECT 1 FROM table;" \
+    # Producing a PNG of a code snippet, using the "vim" stylesheet,
+    # 36-point font (default is 14), 21px line spacing (default is 2px),
+    # and highlighting lines 2, 4, and 6 in hot pink (line numbers are on by default)
+    printf 'SELECT *\n\t, name, id\nFROM\n\tdTable AS Texas\nWHERE\n\tid > "Howdy"\nORDER BY\n\tname DESC;' \
       | pygmentize -f png -l sql \
-      > /tmp/pygsql.png
+        -O 'style=vim' \
+        -O 'font_size=36,line_pad=21' \
+        -O 'hl_color=hotpink,hl_lines=2 4 6' \
+      > assets/pretty-pyg-sql.png
+
+  output_md: |
+    Example of rich-text format (`-f rtf`) being pasted into GMail:
+
+    ![pygmentize -f rtf -l](./assets/pygmentized-gmailed-snippet.png)
+
+    Example of writing pygmentize into PNG file:
+
+    ![pygmentize -f png](assets/pretty-pyg-sql.png)
 
   notes: |
     - install via pip: `pip install --upgrade Pygments`
-    - Use `-L` to list all styles, formatters, and lexers
-    - style gallery: http://richleland.github.io/pygments-css/
-    - Use `-o` to output to file
-    - Use `-O` to set options, like `style=solarized-light`
+    - Use `-L` to get your installed version of pygmentize's most complete list of all styles, formatters, and lexers
+
 
 
 "`rsync` the contents of one directory into another":

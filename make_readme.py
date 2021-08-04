@@ -52,6 +52,12 @@ def make_body(manifest):
             body += "\nOutput:\n"
             body += f"""\n```\n{m['output']}```\n"""
 
+        # output md (meant to be parsed as raw markdown into HTML)
+        if m.get("output_md"):
+            body += "\n\n" # assume user can add label as they like
+            body += f"""\n{m['output_md']}\n\n"""
+
+
         if m.get("articles"):
             articles = m["articles"]
             body += "\n**References**: \n\n"
