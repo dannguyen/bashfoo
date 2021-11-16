@@ -28,6 +28,29 @@
 ############################################################################################################
 
 
+
+"`ffmpeg` optimize video and reduce its file size":
+  date: 2021-11-15
+  code: |
+    ffmpeg -i my_video.mp4 -vcodec libx264 -crf 28 my_video_optimized.mp4
+  articles:
+    - url: https://unix.stackexchange.com/questions/28803/how-can-i-reduce-a-videos-size-with-ffmpeg
+      title: How can I reduce a video's size with ffmpeg?
+
+
+"`youtube-dl` to download just a video's transcript/subtitle files":
+  date: 2021-08-04
+  code: |
+    youtube-dl --write-sub --skip-download https://www.youtube.com/watch?v=PMp_-OX15Jc
+
+  output: |
+    [youtube] PMp_-OX15Jc: Downloading webpage
+    [youtube] PMp_-OX15Jc: Downloading MPD manifest
+    [info] Writing video subtitles to: What is Public Domain-PMp_-OX15Jc.en.vtt
+
+
+
+
 "`date` add a UTC timestamp in ISO-8601 format to a filename":
   date: 2021-08-03
   code: |
@@ -125,15 +148,25 @@
     - title: High quality GIF with FFmpeg
       url: https://web.archive.org/web/20200612084604/http://blog.pkh.me/p/21-high-quality-gif-with-ffmpeg.html
 
-"`ffmpeg` downscale and optimize a video":
+"`ffmpeg` resize a video and preserve its aspect ratio":
   date: 2021-06-21
+  updated: 2021-11-15
   code: |
-    ffmpeg -i invideo.mp4 \
-      -vcodec libx264 -crf 28 -vf scale=2000:-2 \
-      outvideo.mp4
+    # to rescale a video's width to 450 pixels and autoscale its height
+    ffmpeg -i in_video.mp4 -vf scale=450:-2 out_video.mp4
+
+    # to rescale a video's height to 204 pixels and autoscale its width
+    ffmpeg -i in_video.mp4 -vf scale=-2:204 out_video.mp4
+
+    # Note that the given pixel width/height should be an even number
+    # to avoid getting an error like: height not divisible by 2 (500x201)
+
   articles:
-    - title: "How can I reduce a video's size with ffmpeg?"
-      url: https://unix.stackexchange.com/questions/28803/how-can-i-reduce-a-videos-size-with-ffmpeg
+    - title: "How to resize a video to make it smaller with FFmpeg"
+      url: https://superuser.com/questions/624563/how-to-resize-a-video-to-make-it-smaller-with-ffmpeg
+    - title: |
+        FFMPEG (libx264) "height not divisible by 2"
+      url: https://stackoverflow.com/questions/20847674/ffmpeg-libx264-height-not-divisible-by-2
 
 "`pandoc` convert a Markdown file into a Word docx":
   date: 2021-04-21

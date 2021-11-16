@@ -11,8 +11,9 @@ Dan Nguyen's personally curated list of bash/command-line commands and snippets
 
 - [`date` add a UTC timestamp in ISO-8601 format to a filename](#manifest--date-add-a-utc-timestamp-in-iso-8601-format-to-a-filename)
 - [`ffmpeg` convert a video to gif](#manifest--ffmpeg-convert-a-video-to-gif)
-- [`ffmpeg` downscale and optimize a video](#manifest--ffmpeg-downscale-and-optimize-a-video)
 - [`ffmpeg` encode .mkv video to .mp4](#manifest--ffmpeg-encode-mkv-video-to-mp4)
+- [`ffmpeg` optimize video and reduce its file size](#manifest--ffmpeg-optimize-video-and-reduce-its-file-size)
+- [`ffmpeg` resize a video and preserve its aspect ratio](#manifest--ffmpeg-resize-a-video-and-preserve-its-aspect-ratio)
 - [`find` and execute command on each file](#manifest--find-and-execute-command-on-each-file)
 - [`find` and list the top 10 most recently modified subdirectories](#manifest--find-and-list-the-top-10-most-recently-modified-subdirectories)
 - [`find` and tally total kilobytes of hard disk space for files with given extension(s)](#manifest--find-and-tally-total-kilobytes-of-hard-disk-space-for-files-with-given-extension-s-)
@@ -30,6 +31,7 @@ Dan Nguyen's personally curated list of bash/command-line commands and snippets
 - [`tar` extraction, verbose](#manifest--tar-extraction-verbose)
 - [`unzip` only an archive's CSV files and pipe to stdout](#manifest--unzip-only-an-archive-s-csv-files-and-pipe-to-stdout)
 - [`xargs` (BSD) to pipe results into another command, one at a time](#manifest--xargs-bsd-to-pipe-results-into-another-command-one-at-a-time)
+- [`youtube-dl` to download just a video's transcript/subtitle files](#manifest--youtube-dl-to-download-just-a-video-s-transcript-subtitle-files)
 
 
 
@@ -88,23 +90,6 @@ ffmpeg -y -i input.mp4 -i palette.png -lavfi paletteuse output.gif
 
 
 -------------------------------
-<a name="manifest--ffmpeg-downscale-and-optimize-a-video" id="manifest--ffmpeg-downscale-and-optimize-a-video"></a>
-
-### `ffmpeg` downscale and optimize a video
-
-```sh
-# Example
-ffmpeg -i invideo.mp4 \
-  -vcodec libx264 -crf 28 -vf scale=2000:-2 \
-  outvideo.mp4
-```
-
-**References**: 
-
-- [How can I reduce a video's size with ffmpeg?](https://unix.stackexchange.com/questions/28803/how-can-i-reduce-a-videos-size-with-ffmpeg)
-
-
--------------------------------
 <a name="manifest--ffmpeg-encode-mkv-video-to-mp4" id="manifest--ffmpeg-encode-mkv-video-to-mp4"></a>
 
 ### `ffmpeg` encode .mkv video to .mp4
@@ -117,6 +102,45 @@ ffmpeg -i input.mkv -acodec aac -vcodec libx264 output.mp4
 **References**: 
 
 - [How can I convert an m4v video to a widely viewable format using ffmpeg?](https://superuser.com/a/462112/512499)
+
+
+-------------------------------
+<a name="manifest--ffmpeg-optimize-video-and-reduce-its-file-size" id="manifest--ffmpeg-optimize-video-and-reduce-its-file-size"></a>
+
+### `ffmpeg` optimize video and reduce its file size
+
+```sh
+# Example
+ffmpeg -i my_video.mp4 -vcodec libx264 -crf 28 my_video_optimized.mp4
+```
+
+**References**: 
+
+- [How can I reduce a video's size with ffmpeg?](https://unix.stackexchange.com/questions/28803/how-can-i-reduce-a-videos-size-with-ffmpeg)
+
+
+-------------------------------
+<a name="manifest--ffmpeg-resize-a-video-and-preserve-its-aspect-ratio" id="manifest--ffmpeg-resize-a-video-and-preserve-its-aspect-ratio"></a>
+
+### `ffmpeg` resize a video and preserve its aspect ratio
+
+```sh
+# Example
+# to rescale a video's width to 450 pixels and autoscale its height
+ffmpeg -i in_video.mp4 -vf scale=450:-2 out_video.mp4
+
+# to rescale a video's height to 204 pixels and autoscale its width
+ffmpeg -i in_video.mp4 -vf scale=-2:204 out_video.mp4
+
+# Note that the given pixel width/height should be an even number
+# to avoid getting an error like: height not divisible by 2 (500x201)
+```
+
+**References**: 
+
+- [How to resize a video to make it smaller with FFmpeg](https://superuser.com/questions/624563/how-to-resize-a-video-to-make-it-smaller-with-ffmpeg)
+- [FFMPEG (libx264) "height not divisible by 2"
+](https://stackoverflow.com/questions/20847674/ffmpeg-libx264-height-not-divisible-by-2)
 
 
 -------------------------------
@@ -562,3 +586,22 @@ Hey, Charlie is a great name!
 **References**: 
 
 - [Execute a command once per line of piped input?](https://unix.stackexchange.com/questions/7558/execute-a-command-once-per-line-of-piped-input)
+
+
+-------------------------------
+<a name="manifest--youtube-dl-to-download-just-a-video-s-transcript-subtitle-files" id="manifest--youtube-dl-to-download-just-a-video-s-transcript-subtitle-files"></a>
+
+### `youtube-dl` to download just a video's transcript/subtitle files
+
+```sh
+# Example
+youtube-dl --write-sub --skip-download https://www.youtube.com/watch?v=PMp_-OX15Jc
+```
+
+Output:
+
+```
+[youtube] PMp_-OX15Jc: Downloading webpage
+[youtube] PMp_-OX15Jc: Downloading MPD manifest
+[info] Writing video subtitles to: What is Public Domain-PMp_-OX15Jc.en.vtt
+```
