@@ -1,8 +1,14 @@
 
-## Entries that need to be polished
+# DRAFT STUFF AND NOTES TO SELF
+
+- Just adding stuff for git teaching purposes
 
 Todos:
+
 - figure out `output_md` feature...?
+
+
+## Entries to be polished
 
 ```yaml
 
