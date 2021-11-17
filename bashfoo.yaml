@@ -47,9 +47,9 @@
   notes: |
     Chicago neighborhood shapefile comes from [the city data portal](https://data.cityofchicago.org/Facilities-Geographic-Boundaries/Boundaries-Neighborhoods/bbvz-uum9)
 
-    Download a mirror copy from this repo: [chicago_neighborhoods.zip](assets/samples/chicago_neighborhoods.zip)
+    Download a copy of the zipped shapefile: [chicago_neighborhoods.zip](https://github.com/dannguyen/bashfoo/raw/master/assets/samples/chicago_neighborhoods.zip)
 
-    See the results of turning a shapefile into CSV: [chicago_neighborhoods_output.csv](assets/samples/chicago_neighborhoods_output.csv)
+    This is what a shapefile converted into CSV looks like: [chicago_neighborhoods_output.csv](assets/samples/chicago_neighborhoods_output.csv)
 
 
 
