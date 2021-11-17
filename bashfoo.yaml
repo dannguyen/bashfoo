@@ -29,6 +29,30 @@
 
 
 
+"`ogr2ogr` convert a shapefile into CSV + GeoJSON":
+  date: 2021-11-16
+  code: |
+    ogr2ogr -f CSV \
+        -dialect sqlite \
+        -sql 'SELECT *, AsGeoJSON(geometry) AS geom FROM chicago_neighborhoods' \
+        chicago_neighborhoods_output.csv  \
+        chicago_neighborhoods.shp
+
+  articles:
+    - url: https://medium.com/google-cloud/how-to-load-geographic-data-like-zipcode-boundaries-into-bigquery-25e4be4391c8
+      title: How to load geographic data like shapefiles into BigQuery
+    - url: https://gdal.org/programs/ogr2ogr.html
+      title: ogr2ogr man page
+
+  notes: |
+    Chicago neighborhood shapefile comes from [the city data portal](https://data.cityofchicago.org/Facilities-Geographic-Boundaries/Boundaries-Neighborhoods/bbvz-uum9)
+
+    Download a mirror copy from this repo: [chicago_neighborhoods.zip](assets/samples/chicago_neighborhoods.zip)
+
+    See the results of turning a shapefile into CSV: [chicago_neighborhoods_output.csv](assets/samples/chicago_neighborhoods_output.csv)
+
+
+
 "`ffmpeg` optimize video and reduce its file size":
   date: 2021-11-15
   code: |

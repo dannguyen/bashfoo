@@ -20,6 +20,7 @@ Dan Nguyen's personally curated list of bash/command-line commands and snippets
 - [`find` directory name recursively](#manifest--find-directory-name-recursively)
 - [`find` file by name](#manifest--find-file-by-name)
 - [`magick` convert image to favicon.ico](#manifest--magick-convert-image-to-favicon-ico)
+- [`ogr2ogr` convert a shapefile into CSV + GeoJSON](#manifest--ogr2ogr-convert-a-shapefile-into-csv-geojson)
 - [`pandoc` convert a Markdown file into a Word docx](#manifest--pandoc-convert-a-markdown-file-into-a-word-docx)
 - [`pgrep` and get all process info](#manifest--pgrep-and-get-all-process-info)
 - [`pkill` using a file pattern](#manifest--pkill-using-a-file-pattern)
@@ -279,6 +280,35 @@ magick /tmp/testimage.png -background none -resize 128x128 -density 128x128 favi
 **References**: 
 
 - [Convert PNG to ICO](https://imagemagick.org/discourse-server/viewtopic.php?t=36031)
+
+
+-------------------------------
+<a name="manifest--ogr2ogr-convert-a-shapefile-into-csv-geojson" id="manifest--ogr2ogr-convert-a-shapefile-into-csv-geojson"></a>
+
+### `ogr2ogr` convert a shapefile into CSV + GeoJSON
+
+```sh
+# Example
+ogr2ogr -f CSV \
+    -dialect sqlite \
+    -sql 'SELECT *, AsGeoJSON(geometry) AS geom FROM chicago_neighborhoods' \
+    chicago_neighborhoods_output.csv  \
+    chicago_neighborhoods.shp
+```
+
+**References**: 
+
+- [How to load geographic data like shapefiles into BigQuery](https://medium.com/google-cloud/how-to-load-geographic-data-like-zipcode-boundaries-into-bigquery-25e4be4391c8)
+- [ogr2ogr man page](https://gdal.org/programs/ogr2ogr.html)
+
+**Notes**: 
+
+
+Chicago neighborhood shapefile comes from [the city data portal](https://data.cityofchicago.org/Facilities-Geographic-Boundaries/Boundaries-Neighborhoods/bbvz-uum9)
+
+Download a mirror copy from this repo: [chicago_neighborhoods.zip](assets/samples/chicago_neighborhoods.zip)
+
+See the results of turning a shapefile into CSV: [chicago_neighborhoods_output.csv](assets/samples/chicago_neighborhoods_output.csv)
 
 
 -------------------------------
