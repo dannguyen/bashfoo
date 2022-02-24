@@ -10,6 +10,7 @@ Dan Nguyen's personally curated list of bash/command-line commands and snippets
 ## TOC
 
 - [`date` add a UTC timestamp in ISO-8601 format to a filename](#manifest--date-add-a-utc-timestamp-in-iso-8601-format-to-a-filename)
+- [`du` recursively list directories and their disk space size](#manifest--du-recursively-list-directories-and-their-disk-space-size)
 - [`ffmpeg` convert a video to gif](#manifest--ffmpeg-convert-a-video-to-gif)
 - [`ffmpeg` encode .mkv video to .mp4](#manifest--ffmpeg-encode-mkv-video-to-mp4)
 - [`ffmpeg` optimize video and reduce its file size](#manifest--ffmpeg-optimize-video-and-reduce-its-file-size)
@@ -58,6 +59,83 @@ printf "mydata_%s.csv\n" $(date -u +"%Y-%m-%d-%H%M")
 **References**: 
 
 - [date command --iso-8601 option](https://unix.stackexchange.com/questions/164826/date-command-iso-8601-option)
+
+
+-------------------------------
+<a name="manifest--du-recursively-list-directories-and-their-disk-space-size" id="manifest--du-recursively-list-directories-and-their-disk-space-size"></a>
+
+### `du` recursively list directories and their disk space size
+
+```sh
+# Example
+# GNU du (verbose)
+du --human-readable --max-depth=2 ./bashfoo
+
+# GNU du (concise) / BSD du (i.e. MacOS)
+du -h -d 2 ./bashfoo
+```
+
+Output:
+
+```
+2.4M  ./bashfoo/.git/objects
+4.0K  ./bashfoo/.git/info
+ 44K  ./bashfoo/.git/logs
+ 48K  ./bashfoo/.git/hooks
+ 16K  ./bashfoo/.git/refs
+2.6M  ./bashfoo/.git
+3.6M  ./bashfoo/assets/samples
+3.6M  ./bashfoo/assets
+6.3M  ./bashfoo
+```
+
+**References**: 
+
+- [List all directories and sort by size](https://linuxconfig.org/list-all-directories-and-sort-by-size)
+- [How to sort human readable size](https://unix.stackexchange.com/questions/524760/how-to-sort-human-readable-size)
+- [How to replace Mac OS X utilities with GNU core utilities?](https://apple.stackexchange.com/questions/69223/how-to-replace-mac-os-x-utilities-with-gnu-core-utilities)
+
+**Notes**: 
+
+
+
+More variations and usecases for GNU du:
+
+*List only directories of a minimum size*
+
+```sh
+# (concise) $ du -t 3M ./bashfoo
+$ du --threshold 3M ./bashfoo
+3660  bashfoo/assets/samples
+3728  bashfoo/assets
+6436  bashfoo/
+```
+
+
+*Specify a size unit, e.g. K, M, G for: kb, mb, gb*
+
+```sh
+# (concise) $ du -B M ./bashfoo
+$ du --block-size M ./bashfoo
+1M  ./bashfoo/.git/objects/61
+...
+1M  ./bashfoo/assets/samples/chicago_neighborhoods
+4M  ./bashfoo/assets/samples
+4M  ./bashfoo/assets
+7M  ./bashfoo/
+```
+
+
+*List largest 5 directories using human-numeric-sort*
+
+```sh
+$ du -h ~/Downloads | sort -h -r | head -n 5
+2.6G  /Users/me/Downloads
+851M  /Users/me/Downloads/ebooks
+233M  /Users/me/Downloads/OLD_JUNK
+25M   /Users/me/Downloads/names
+9.5M  /Users/me/Downloads/bootstrap-4.5.2
+```
 
 
 -------------------------------

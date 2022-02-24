@@ -28,6 +28,77 @@
 ############################################################################################################
 
 
+"`du` recursively list directories and their disk space size":
+  date: 2022-02-23
+  articles:
+    - url: https://linuxconfig.org/list-all-directories-and-sort-by-size
+      title: List all directories and sort by size
+    - url: https://unix.stackexchange.com/questions/524760/how-to-sort-human-readable-size
+      title: How to sort human readable size
+    - url: https://apple.stackexchange.com/questions/69223/how-to-replace-mac-os-x-utilities-with-gnu-core-utilities
+      title: How to replace Mac OS X utilities with GNU core utilities?
+
+
+  code: |
+    # GNU du (verbose)
+    du --human-readable --max-depth=2 ./bashfoo
+
+    # GNU du (concise) / BSD du (i.e. MacOS)
+    du -h -d 2 ./bashfoo
+
+  output: |
+    2.4M  ./bashfoo/.git/objects
+    4.0K  ./bashfoo/.git/info
+     44K  ./bashfoo/.git/logs
+     48K  ./bashfoo/.git/hooks
+     16K  ./bashfoo/.git/refs
+    2.6M  ./bashfoo/.git
+    3.6M  ./bashfoo/assets/samples
+    3.6M  ./bashfoo/assets
+    6.3M  ./bashfoo
+
+
+  notes: |
+
+    More variations and usecases for GNU du:
+
+    *List only directories of a minimum size*
+
+    ```sh
+    # (concise) $ du -t 3M ./bashfoo
+    $ du --threshold 3M ./bashfoo
+    3660  bashfoo/assets/samples
+    3728  bashfoo/assets
+    6436  bashfoo/
+    ```
+
+
+    *Specify a size unit, e.g. K, M, G for: kb, mb, gb*
+
+    ```sh
+    # (concise) $ du -B M ./bashfoo
+    $ du --block-size M ./bashfoo
+    1M  ./bashfoo/.git/objects/61
+    ...
+    1M  ./bashfoo/assets/samples/chicago_neighborhoods
+    4M  ./bashfoo/assets/samples
+    4M  ./bashfoo/assets
+    7M  ./bashfoo/
+    ```
+
+
+    *List largest 5 directories using human-numeric-sort*
+
+    ```sh
+    $ du -h ~/Downloads | sort -h -r | head -n 5
+    2.6G  /Users/me/Downloads
+    851M  /Users/me/Downloads/ebooks
+    233M  /Users/me/Downloads/OLD_JUNK
+    25M   /Users/me/Downloads/names
+    9.5M  /Users/me/Downloads/bootstrap-4.5.2
+    ```
+
+
 
 "`ogr2ogr` convert a shapefile into CSV + GeoJSON":
   date: 2021-11-16
