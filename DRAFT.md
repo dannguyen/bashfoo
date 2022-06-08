@@ -8,6 +8,8 @@ Todos:
 - figure out `output_md` feature...?
 
 
+exiftool https://apple.stackexchange.com/a/206082/153570
+
 ## Entries to be polished
 
 ```yaml

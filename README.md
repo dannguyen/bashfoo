@@ -530,7 +530,7 @@ Example of writing pygmentize into PNG file:
 
 ```sh
 # Example
-rsync -av src_dir/ target_dir
+rsync -ahv --progress src_dir/ target_dir
 ```
 
 Output:
@@ -557,8 +557,12 @@ total size is 472016  speedup is 1.00
 
 
 - only the source directory should have a trailing slash
-- the `-v` flag makes for verbose output
-- the `-n` flag does a dry run
+- `-v` makes for verbose output
+- `-n` does a dry run
+- `-z` compresses files
+- `--progress` provides a progress bar
+- `-u` updates only the destination files older than the source files
+- `h` human-readable numbers
 
 
 -------------------------------
